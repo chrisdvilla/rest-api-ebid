@@ -20,13 +20,21 @@ const app = express();
  
  app.use(cors(corsOptions)); */
 
- app.use((req, res, next) => {
+ /* app.use((req, res, next) => {
    res.append('Access-Control-Allow-Origin', ['*']);
    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
    //res.append('Access-Control-Allow-Headers', 'Content-Type');
    next();
-});
+}); */
 
+app.use((req,res,next)=>{
+   res.header('Access-Control-Allow-Headers, *, Access-Control-Allow-Origin', 'Origin, X-Requested-with, Content_Type,Accept,Authorization','http://localhost:4200');
+   if(req.method === 'OPTIONS') {
+       res.header('Access-Control-Allow-Methods','PUT,POST,PATCH,DELETE,GET');
+       return res.status(200).json({});
+   }
+   next();
+});
 
 app.use(express.json())
 
