@@ -8,7 +8,8 @@ const corsOptions = {
     optionsSuccessStatus: 200,
   };
  
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
+app.use(cors());
 
 app.listen(PORT)
 console.log('Server running on port', PORT)
