@@ -9,7 +9,7 @@ const corsOptions = {
   };
  
 //app.use(cors(corsOptions));
-//app.use(cors());
+app.use(cors());
 
 /* app.use((req, res, next) => {
 
@@ -20,16 +20,13 @@ const corsOptions = {
 
 }); */
 
-app.all('*', function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
-  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-
-  if (req.method == 'OPTIONS') {
-      res.send(200);
-  } else {
-      next();
+app.use((req,res,next)=>{
+  res.header('Access-Control-Allow-Headers, *, Access-Control-Allow-Origin', 'Origin, X-Requested-with, Content_Type,Accept,Authorization','http://localhost:4200');
+  if(req.method === 'OPTIONS') {
+      res.header('Access-Control-Allow-Methods','PUT,POST,PATCH,DELETE,GET');
+      return res.status(200).json({});
   }
+  next();
 });
 
 app.listen(PORT)
