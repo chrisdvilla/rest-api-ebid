@@ -37,8 +37,6 @@ export const createDocente = async (req, res) => {
     apellidos, 
     genero,
     mobile,
-    usuario,
-    password,
     designacion,
     especialidad,
     direccion,
@@ -55,15 +53,13 @@ export const createDocente = async (req, res) => {
  
   try { 
       const [rows] = await pool.query(
-    "INSERT INTO docente (foto,nombre, apellidos, genero, mobile, usuario, password, designacion, especialidad, direccion, email, fecha_ingreso, trayectoria, gestion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    "INSERT INTO docente (foto,nombre, apellidos, genero, mobile, designacion, especialidad, direccion, email, fecha_ingreso, trayectoria, gestion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
     [
         foto,
         nombre, 
         apellidos, 
         genero,
         mobile,
-        usuario,
-        password,
         designacion,
         especialidad,
         direccion,
@@ -95,8 +91,6 @@ export const createDocente = async (req, res) => {
       apellidos, 
       genero,
       mobile,
-      usuario,
-      password,
       designacion,
       especialidad,
       direccion,
@@ -111,14 +105,12 @@ export const createDocente = async (req, res) => {
         const mySQLDateString_fecha_ingreso = isoDate_fecha_ingreso.toJSON().slice(0, 19).replace('T', ' '); 
 
   try {
-    const [result] = await pool.query('UPDATE docente SET nombre = IFNULL(?,nombre), apellidos = IFNULL(?,apellidos), genero = IFNULL(?,genero), mobile = IFNULL(?,mobile), usuario = IFNULL(?,usuario), password = IFNULL(?,password), designacion = IFNULL(?,designacion), especialidad = IFNULL(?,especialidad),  direccion = IFNULL(?,direccion), email = IFNULL(?,email), fecha_ingreso = IFNULL(?,fecha_ingreso), trayectoria = IFNULL(?,trayectoria), gestion = IFNULL(?,gestion) WHERE id = ?'
+    const [result] = await pool.query('UPDATE docente SET nombre = IFNULL(?,nombre), apellidos = IFNULL(?,apellidos), genero = IFNULL(?,genero), mobile = IFNULL(?,mobile), designacion = IFNULL(?,designacion), especialidad = IFNULL(?,especialidad),  direccion = IFNULL(?,direccion), email = IFNULL(?,email), fecha_ingreso = IFNULL(?,fecha_ingreso), trayectoria = IFNULL(?,trayectoria), gestion = IFNULL(?,gestion) WHERE id = ?'
   , [
     nombre, 
     apellidos, 
     genero,
     mobile,
-    usuario,
-    password,
     designacion,
     especialidad,
     direccion,
