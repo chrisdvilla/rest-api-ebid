@@ -8,7 +8,6 @@ import docentesRoutes from './routes/docentes.routes.js'
 import salasRoutes from './routes/salas.routes.js'
 import indexRoutes from './routes/index.routes.js'
 
-const cors = require('cors');
 
 const app = express();
 
