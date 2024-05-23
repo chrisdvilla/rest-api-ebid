@@ -10,17 +10,16 @@ import indexRoutes from './routes/index.routes.js'
 
 const cors = require('cors');
 
-const app = express()
-app.use(cors());
+const app = express();
 
-app.use((req,res,next)=>{
-  res.header('Access-Control-Allow-Headers, *, Access-Control-Allow-Origin', 'Origin, X-Requested-with, Content_Type,Accept,Authorization','http://localhost:4200');
-  if(req.method === 'OPTIONS') {
-      res.header('Access-Control-Allow-Methods','PUT,POST,PATCH,DELETE,GET');
-      return res.status(200).json({});
-  }
-  next();
-});
+const corsOptions ={
+   origin:'*', 
+   credentials:true,            //access-control-allow-credentials:true
+   optionSuccessStatus:200,
+   methods: "GET, POST"
+ }
+ 
+ app.use(cors(corsOptions));
 
 
 app.use(express.json())
