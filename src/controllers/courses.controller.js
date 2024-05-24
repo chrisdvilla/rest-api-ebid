@@ -35,17 +35,19 @@ export const createCourse = async (req, res) => {
     codigo_mat, 
     nombre_mat, 
     detalle_mat,
+    predecesor_mat,
     
        } = req.body;
   console.log(req.body)
  
   try { 
       const [rows] = await pool.query(
-    "INSERT INTO curso (codigo_mat, nombre_mat, detalle_mat) VALUES (?,?,?)",
+    "INSERT INTO curso (codigo_mat, nombre_mat, detalle_mat, predecesor_mat) VALUES (?,?,?,?)",
     [
         codigo_mat, 
         nombre_mat, 
         detalle_mat,
+        predecesor_mat
       ]
   ); 
 
@@ -69,16 +71,18 @@ export const createCourse = async (req, res) => {
     codigo_mat, 
     nombre_mat, 
     detalle_mat,
+    predecesor_mat,
 
         } = req.body;
 
         
   try {
-    const [result] = await pool.query('UPDATE curso SET codigo_mat = IFNULL(?,codigo_mat), nombre_mat = IFNULL(?,nombre_mat), detalle_mat = IFNULL(?,detalle_mat) WHERE id = ?'
+    const [result] = await pool.query('UPDATE curso SET codigo_mat = IFNULL(?,codigo_mat), nombre_mat = IFNULL(?,nombre_mat), detalle_mat = IFNULL(?,detalle_mat), predecesor_mat = IFNULL(?,predecesor_mat) WHERE id = ?'
   , [
     codigo_mat, 
     nombre_mat, 
     detalle_mat,
+    predecesor_mat,
     id
   ])
 
