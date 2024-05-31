@@ -70,41 +70,23 @@ export const createSala = async (req, res) => {
  export const updateSala = async (req, res) => {
   const { id } = req.params;
   const { 
-      nombre, 
-      apellidos, 
-      genero,
-      mobile,
-      usuario,
-      password,
-      designacion,
-      especialidad,
-      direccion,
-      email,
-      fecha_ingreso,
-      trayectoria,
-      gestion 
+    nombre, 
+    designacion, 
+    capacidad,
+    gestion,
+    descripcion
 
-        } = req.body;
+    } = req.body;
 
-        const isoDate_fecha_ingreso = new Date(fecha_ingreso);
-        const mySQLDateString_fecha_ingreso = isoDate_fecha_ingreso.toJSON().slice(0, 19).replace('T', ' '); 
-
+       
   try {
-    const [result] = await pool.query('UPDATE sala SET nombre = IFNULL(?,nombre), apellidos = IFNULL(?,apellidos), genero = IFNULL(?,genero), mobile = IFNULL(?,mobile), usuario = IFNULL(?,usuario), password = IFNULL(?,password), designacion = IFNULL(?,designacion), especialidad = IFNULL(?,especialidad),  direccion = IFNULL(?,direccion), email = IFNULL(?,email), fecha_ingreso = IFNULL(?,fecha_ingreso), trayectoria = IFNULL(?,trayectoria), gestion = IFNULL(?,gestion) WHERE id = ?'
+    const [result] = await pool.query('UPDATE sala SET nombre = IFNULL(?,nombre), designacion = IFNULL(?,designacion), capacidad = IFNULL(?,capacidad), gestion = IFNULL(?,gestion), descripcion = IFNULL(?,descripcion) WHERE id = ?'
   , [
     nombre, 
-    apellidos, 
-    genero,
-    mobile,
-    usuario,
-    password,
-    designacion,
-    especialidad,
-    direccion,
-    email,
-    mySQLDateString_fecha_ingreso,
-    trayectoria,
+    designacion, 
+    capacidad,
     gestion,
+    descripcion,
     id
   ])
 
@@ -112,7 +94,7 @@ export const createSala = async (req, res) => {
 
     if (result.affectedRows === 0)
         return res.status(404).json({
-          message: "Docente no encontrado",
+          message: "Sala no encontrado",
         });
 
     const [rows] = await pool.query("SELECT * FROM sala WHERE id= ?", [id]);
@@ -133,7 +115,7 @@ export const deleteSala = async (req, res) => {
 
     if (result.affectedRows <= 0)
       return res.status(404).json({
-        message: "Docente no encontrado",
+        message: "Sala no encontrado",
       });
 
     res.sendStatus(204);
