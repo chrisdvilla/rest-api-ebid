@@ -56,7 +56,9 @@ export const registerCtrl = async (req, res) => {
         firstName,
         lastName,
         role,
-        token
+        token,
+        id_alumno,
+        id_docente
         
         } = req.body;
 
@@ -66,7 +68,7 @@ export const registerCtrl = async (req, res) => {
      
       try { 
           const [rows] = await pool.query(
-        "INSERT INTO user (img, username, password, firstName, lastName,role,token) VALUES (?,?,?,?,?,?,?)",
+        "INSERT INTO user (img, username, password, firstName, lastName,role,token, id_alumno, id_docente) VALUES (?,?,?,?,?,?,?,?,?)",
         [
             img,
             username,
@@ -74,7 +76,9 @@ export const registerCtrl = async (req, res) => {
             firstName,
             lastName,
             role,
-            token
+            token,
+            id_alumno,
+            id_docente
           ]
       ); 
     
@@ -93,4 +97,138 @@ export const registerCtrl = async (req, res) => {
 
 }
 
+export const getUserAlumno = async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT * FROM user WHERE id_alumno = ?", [
+      req.params.id_alumno,
+    ]);
+
+    if (rows.length <= 0)
+      return res.status(404).json({
+        message: "Estudiante no encontrado",
+      });
+
+    res.json(rows[0]);
+  } catch (error) {
+    return res.status(500).json({
+      message: "Algo salio mal",
+    });
+  }
+};
+
+export const getUserDocente = async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT * FROM user WHERE id_docente = ?", [
+      req.params.id_docente,
+    ]);
+
+    if (rows.length <= 0)
+      return res.status(404).json({
+        message: "Docente no encontrado",
+      });
+
+    res.json(rows[0]);
+  } catch (error) {
+    return res.status(500).json({
+      message: "Algo salio mal",
+    });
+  }
+};
+
+export const updateUserAlumno = async (req, res) => {
+  const { id } = req.params;
+  const { 
+    //img,
+    username,
+    password,
+    firstName,
+    lastName,
+    role,
+    token,
+    id_alumno,
+    id_docente
+
+        } = req.body;
+
+    const passwordHash = await encrypt(password)
+
+  try {
+    const [result] = await pool.query('UPDATE user SET username = IFNULL(?,username), password = IFNULL(?,password), firstName = IFNULL(?,firstName), lastName = IFNULL(?,lastName), role = IFNULL(?,role), token = IFNULL(?,token), id_alumno = IFNULL(?,id_alumno), id_docente = IFNULL(?,id_docente) WHERE id = ?'
+  , [
+    username,
+    passwordHash,
+    firstName,
+    lastName,
+    role,
+    token,
+    id_alumno,
+    id_docente,
+    id
+  ])
+
+    console.log(result);
+
+    if (result.affectedRows === 0)
+        return res.status(404).json({
+          message: "Usuario no encontrado",
+        });
+
+    const [rows] = await pool.query("SELECT * FROM user WHERE id= ?", [id]);
+
+    res.json(rows[0]);
+  } catch (error) {
+    return res.status(500).json({
+      message: "Algo salio mal",
+    });
+  }
+}; 
+
+
+export const updateUserDocente = async (req, res) => {
+  const { id } = req.params;
+  const { 
+    //img,
+    username,
+    password,
+    firstName,
+    lastName,
+    role,
+    token,
+    id_alumno,
+    id_docente
+
+        } = req.body;
+
+    const passwordHash = await encrypt(password)
+
+  try {
+    const [result] = await pool.query('UPDATE user SET username = IFNULL(?,username), password = IFNULL(?,password), firstName = IFNULL(?,firstName), lastName = IFNULL(?,lastName), role = IFNULL(?,role), token = IFNULL(?,token), id_alumno = IFNULL(?,id_alumno), id_docente = IFNULL(?,id_docente) WHERE id = ?'
+  , [
+    username,
+    passwordHash,
+    firstName,
+    lastName,
+    role,
+    token,
+    id_alumno,
+    id_docente,
+    id
+  ])
+
+    console.log(result);
+
+    if (result.affectedRows === 0)
+        return res.status(404).json({
+          message: "Usuario no encontrado",
+        });
+
+    const [rows] = await pool.query("SELECT * FROM user WHERE id= ?", [id]);
+
+    res.json(rows[0]);
+  } catch (error) {
+    return res.status(500).json({
+      message: "Algo salio mal",
+    });
+  }
+}; 
 
