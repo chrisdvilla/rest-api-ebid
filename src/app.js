@@ -11,6 +11,7 @@ import indexRoutes from './routes/index.routes.js'
 import horariosRoutes from './routes/horarios.routes.js'
 import authRoutes from './routes/auth.routes.js'
 import materiasDocRoutes from './routes/materiasDoc.routes.js'
+import materiasRegRoutes from './routes/materiasReg.routes.js'
 
 
 const app = express();
@@ -42,6 +43,7 @@ app.use('/api',paralelosRoutes)
 app.use('/api',horariosRoutes)
 app.use('/api',authRoutes)
 app.use('/api',materiasDocRoutes)
+app.use('/api',materiasRegRoutes)
 
 app.use((req, res, next) => {
    res.status(404).json({
