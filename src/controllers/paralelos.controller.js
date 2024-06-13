@@ -37,7 +37,8 @@ export const createParalelo = async (req, res) => {
     paralelo,
     docente,
     gestion,
-    id_materia
+    id_materia,
+    id_docente
 
        } = req.body;
   console.log(req.body)
@@ -45,12 +46,13 @@ export const createParalelo = async (req, res) => {
  
   try { 
       const [rows] = await pool.query(
-    "INSERT INTO paralelo (paralelo,docente,gestion,id_materia) VALUES (?,?,?,?)",
+    "INSERT INTO paralelo (paralelo,docente,gestion,id_materia, id_docente) VALUES (?,?,?,?,?)",
     [
         paralelo,
         docente,
         gestion,
-        id_materia
+        id_materia,
+        id_docente
       ]
   ); 
 
@@ -75,19 +77,21 @@ export const updateParalelo = async (req, res) => {
     paralelo,
     docente,
     gestion,
-    id_materia
+    id_materia,
+    id_docente
 
      } = req.body;
 
        
 
   try {
-    const [result] = await pool.query('UPDATE paralelo SET paralelo = IFNULL(?,paralelo), docente = IFNULL(?,docente), gestion = IFNULL(?,gestion), id_materia = IFNULL(?,id_materia) WHERE id = ?'
+    const [result] = await pool.query('UPDATE paralelo SET paralelo = IFNULL(?,paralelo), docente = IFNULL(?,docente), gestion = IFNULL(?,gestion), id_materia = IFNULL(?,id_materia), id_docente = IFNULL(?,id_docente) WHERE id = ?'
   , [
     paralelo,
     docente,
     gestion,
     id_materia,
+    id_docente,
       id
   ])
 

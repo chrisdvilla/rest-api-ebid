@@ -3,7 +3,7 @@ import {getMaterias, getAllMaterias } from '../controllers/materiasDoc.controlle
 
 const router = Router()
 
-router.get('/materias/:docente', getMaterias);
+router.get('/materias/:id_docente', getMaterias);
 router.get('/materias/', getAllMaterias);
 
 
