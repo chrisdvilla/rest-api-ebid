@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import {getAlumnos, createAlumno, updateAlumno, deleteAlumno, getAlumno} from '../controllers/alumnos.controller.js'
+import {getAlumnos, createAlumno, updateAlumno, deleteAlumno, getAlumno, getAlumnoInfo} from '../controllers/alumnos.controller.js'
 
 const router = Router()
 
@@ -12,5 +12,7 @@ router.post('/alumnos', createAlumno);
 router.patch('/alumnos/:id', updateAlumno);
 
 router.delete('/alumnos/:id', deleteAlumno);
+
+router.get('/alumnos_info/:id_alumno', getAlumnoInfo);
 
 export default router

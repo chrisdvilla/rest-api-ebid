@@ -30,6 +30,26 @@ export const getAlumno = async (req, res) => {
   }
 };
 
+export const getAlumnoInfo = async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT * FROM alumno JOIN admision ON admision.id_alumno = alumno.id  WHERE alumno.id = ? ", [
+      
+      req.params.id_alumno,
+    ]);
+
+    if (rows.length <= 0)
+      return res.status(404).json({
+        message: "Estudiante no encontrado",
+      });
+
+    res.json(rows[0]);
+  } catch (error) {
+    return res.status(500).json({
+      message: "Algo salio mal",
+    });
+  }
+};
+
 export const createAlumno = async (req, res) => {
   const { 
     num_registro,
