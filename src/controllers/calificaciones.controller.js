@@ -65,7 +65,10 @@ export const createCalificacion = async (req, res) => {
     nota_literal,
     obs,
     segundoT,
-    codigo
+    codigo,
+    nombre,
+    apellido_paterno,
+    apellido_materno
 
 
     
@@ -74,7 +77,7 @@ export const createCalificacion = async (req, res) => {
  
   try { 
       const [rows] = await pool.query(
-    "INSERT INTO calificaciones (asistencia, gestion, id_alumno, id_materia, nota1, nota2, nota3, nota4, notaFinal, nota_literal, obs, segundoT, codigo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    "INSERT INTO calificaciones (asistencia, gestion, id_alumno, id_materia, nota1, nota2, nota3, nota4, notaFinal, nota_literal, obs, segundoT, codigo, nombre, apellido_paterno, apellido_materno) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
     [
         asistencia,
         gestion,
@@ -88,7 +91,10 @@ export const createCalificacion = async (req, res) => {
         nota_literal,
         obs,
         segundoT,
-        codigo
+        codigo,
+        nombre,
+        apellido_paterno,
+        apellido_materno
       ]
   ); 
 
@@ -121,12 +127,16 @@ export const updateCalificacion = async (req, res) => {
         nota_literal,
         obs,
         segundoT,
-        codigo
+        codigo,
+        nombre,
+        apellido_paterno,
+        apellido_materno,
+        //id_docente
   
           } = req.body;
   
     try {
-      const [result] = await pool.query('UPDATE calificaciones SET asistencia = IFNULL(?,asistencia), gestion = IFNULL(?,gestion), id_alumno = IFNULL(?,id_alumno), id_materia = IFNULL(?,id_materia), nota1 = IFNULL(?,nota1), nota2 = IFNULL(?,nota2),  nota3 = IFNULL(?,nota3), nota4 = IFNULL(?,nota4), notaFinal = IFNULL(?,notaFinal), nota_literal = IFNULL(?,nota_literal), obs = IFNULL(?,obs), segundoT = IFNULL(?,segundoT), codigo = IFNULL(?,codigo) WHERE id = ?'
+      const [result] = await pool.query('UPDATE calificaciones SET asistencia = IFNULL(?,asistencia), gestion = IFNULL(?,gestion), id_alumno = IFNULL(?,id_alumno), id_materia = IFNULL(?,id_materia), nota1 = IFNULL(?,nota1), nota2 = IFNULL(?,nota2),  nota3 = IFNULL(?,nota3), nota4 = IFNULL(?,nota4), notaFinal = IFNULL(?,notaFinal), nota_literal = IFNULL(?,nota_literal), obs = IFNULL(?,obs), segundoT = IFNULL(?,segundoT), codigo = IFNULL(?,codigo), nombre = IFNULL(?,nombre), apellido_paterno = IFNULL(?,apellido_paterno), apellido_materno = IFNULL(?,apellido_materno) WHERE id = ?'
     , [
         asistencia,
         gestion,
@@ -141,6 +151,10 @@ export const updateCalificacion = async (req, res) => {
         obs,
         segundoT,
         codigo,
+        nombre,
+        apellido_paterno,
+        apellido_materno,
+        //id_docente
       id
     ])
   
@@ -156,7 +170,8 @@ export const updateCalificacion = async (req, res) => {
       res.json(rows[0]);
     } catch (error) {
       return res.status(500).json({
-        message: "Algo salio mal",
+       //message: "Algo salio mal",
+        message: error.message,
       });
     }
   }; 
