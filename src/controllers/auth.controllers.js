@@ -58,7 +58,8 @@ export const registerCtrl = async (req, res) => {
         role,
         token,
         id_alumno,
-        id_docente
+        id_docente,
+        subRole,
         
         } = req.body;
 
@@ -68,7 +69,7 @@ export const registerCtrl = async (req, res) => {
      
       try { 
           const [rows] = await pool.query(
-        "INSERT INTO user (img, username, password, firstName, lastName,role,token, id_alumno, id_docente) VALUES (?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO user (img, username, password, firstName, lastName,role,token, id_alumno, id_docente, subRole) VALUES (?,?,?,?,?,?,?,?,?,?)",
         [
             img,
             username,
@@ -78,7 +79,8 @@ export const registerCtrl = async (req, res) => {
             role,
             token,
             id_alumno,
-            id_docente
+            id_docente,
+            subRole
           ]
       ); 
     
@@ -146,14 +148,15 @@ export const updateUserAlumno = async (req, res) => {
     role,
     token,
     id_alumno,
-    id_docente
+    id_docente,
+    subRole
 
         } = req.body;
 
     const passwordHash = await encrypt(password)
 
   try {
-    const [result] = await pool.query('UPDATE user SET username = IFNULL(?,username), password = IFNULL(?,password), firstName = IFNULL(?,firstName), lastName = IFNULL(?,lastName), role = IFNULL(?,role), token = IFNULL(?,token), id_alumno = IFNULL(?,id_alumno), id_docente = IFNULL(?,id_docente) WHERE id = ?'
+    const [result] = await pool.query('UPDATE user SET username = IFNULL(?,username), password = IFNULL(?,password), firstName = IFNULL(?,firstName), lastName = IFNULL(?,lastName), role = IFNULL(?,role), token = IFNULL(?,token), id_alumno = IFNULL(?,id_alumno), id_docente = IFNULL(?,id_docente), subRole = IFNULL(?,subRole) WHERE id = ?'
   , [
     username,
     passwordHash,
@@ -163,6 +166,7 @@ export const updateUserAlumno = async (req, res) => {
     token,
     id_alumno,
     id_docente,
+    subRole,
     id
   ])
 
@@ -195,14 +199,15 @@ export const updateUserDocente = async (req, res) => {
     role,
     token,
     id_alumno,
-    id_docente
+    id_docente,
+    subRole
 
         } = req.body;
 
     const passwordHash = await encrypt(password)
 
   try {
-    const [result] = await pool.query('UPDATE user SET username = IFNULL(?,username), password = IFNULL(?,password), firstName = IFNULL(?,firstName), lastName = IFNULL(?,lastName), role = IFNULL(?,role), token = IFNULL(?,token), id_alumno = IFNULL(?,id_alumno), id_docente = IFNULL(?,id_docente) WHERE id = ?'
+    const [result] = await pool.query('UPDATE user SET username = IFNULL(?,username), password = IFNULL(?,password), firstName = IFNULL(?,firstName), lastName = IFNULL(?,lastName), role = IFNULL(?,role), token = IFNULL(?,token), id_alumno = IFNULL(?,id_alumno), id_docente = IFNULL(?,id_docente), subRole = IFNULL(?,subRole) WHERE id = ?'
   , [
     username,
     passwordHash,
@@ -212,6 +217,7 @@ export const updateUserDocente = async (req, res) => {
     token,
     id_alumno,
     id_docente,
+    subRole,
     id
   ])
 
