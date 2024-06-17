@@ -19,8 +19,8 @@ export const getAllMaterias = async (req, res) => {
     console.log("materias");
     console.log(req.body)
    try {
-    const [rows] = await pool.query("SELECT * FROM paralelo JOIN curso ON paralelo.id_materia = curso.id JOIN horario ON horario.id_set = paralelo.id");
-    //const [rows] = await pool.query("SELECT * FROM paralelo JOIN curso ON paralelo.id_materia = curso.id JOIN horario ");
+    //const [rows] = await pool.query("SELECT * FROM paralelo JOIN curso ON paralelo.id_materia = curso.id JOIN horario ON horario.id_set = paralelo.id");
+    const [rows] = await pool.query("SELECT * FROM paralelo JOIN curso ON paralelo.id_materia = curso.id JOIN horario ON horario.id_set = paralelo.id JOIN carreras_mat ON carreras_mat.id_set = paralelo.id");
     res.json(rows);
   } catch (error) {
     return res.status(500).json({
@@ -30,3 +30,17 @@ export const getAllMaterias = async (req, res) => {
 
 };
 
+export const getMateriasCarrera = async (req, res) => {
+  console.log(req.params);
+ try {
+  const [rows] = await pool.query("SELECT * FROM paralelo JOIN curso ON paralelo.id_materia = curso.id JOIN horario ON horario.id_set = paralelo.id JOIN carreras_mat ON carreras_mat.id_set = paralelo.id WHERE carreras_mat.carrera = ? ", [
+      req.params.carrera,
+    ]);
+  res.json(rows);
+} catch (error) {
+  return res.status(500).json({
+    message: "Algo salio mal",
+  });
+} 
+
+};
