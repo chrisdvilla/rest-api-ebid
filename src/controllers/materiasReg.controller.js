@@ -85,10 +85,31 @@ export const createMateriaReg = async (req, res) => {
 };
 
 
-export const deleteMateriaReg = async (req, res) => {
+/* export const deleteMateriaReg = async (req, res) => {
   try {
     const [result] = await pool.query("DELETE FROM materias_reg WHERE id = ?", [
       req.params.id,
+    ]);
+
+    if (result.affectedRows <= 0)
+      return res.status(404).json({
+        message: "Registro no encontrado",
+      });
+
+    res.sendStatus(204);
+  } catch (error) {
+    return res.status(500).json({
+      message: "Algo salio mal",
+    });
+  } 
+}; */   ////old version
+
+
+
+export const deleteMateriaReg = async (req, res) => {
+  try {
+    const [result] = await pool.query("DELETE FROM materias_reg WHERE id_set = ?", [
+      req.params.id_paralelo,
     ]);
 
     if (result.affectedRows <= 0)

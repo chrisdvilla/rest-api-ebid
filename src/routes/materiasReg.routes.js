@@ -9,6 +9,8 @@ router.get('/materiasReg/:id_alumno', getMateriasRegByAlumno);
 
 router.post('/materiasReg', createMateriaReg);
 
-router.delete('/materiasReg/:id', deleteMateriaReg);
+//router.delete('/materiasReg/:id', deleteMateriaReg);
+
+router.delete('/materiasReg/:id_paralelo', deleteMateriaReg);
 
 export default router
