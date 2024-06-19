@@ -16,6 +16,7 @@ import alumnosMateriasRoutes from './routes/alumnosMaterias.routes.js'
 import configuracionRoutes from './routes/configuracion.routes.js'
 import calificacionesRoutes from './routes/calificaciones.routes.js'
 import carrerasMatRoutes from './routes/carrerasMat.routes.js'
+import tallerRoutes from './routes/taller.routes.js'
 
 
 const app = express();
@@ -53,6 +54,7 @@ app.use('/api',alumnosMateriasRoutes)
 app.use('/api',configuracionRoutes)
 app.use('/api',calificacionesRoutes)
 app.use('/api',carrerasMatRoutes)
+app.use('/api',tallerRoutes)
 
 app.use((req, res, next) => {
    res.status(404).json({
