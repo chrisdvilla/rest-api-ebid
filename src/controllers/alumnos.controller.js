@@ -68,7 +68,8 @@ export const createAlumno = async (req, res) => {
     direccion, 
     contacto, 
     edad,
-    fecha_registro
+    fecha_registro,
+    habilitacion,
        } = req.body;
   console.log(req.body)
 
@@ -81,7 +82,7 @@ export const createAlumno = async (req, res) => {
  
   try { 
       const [rows] = await pool.query(
-    "INSERT INTO alumno (num_registro,foto,nombre, apellido_paterno, apellido_materno,fecha_nacimiento, ci, expedido, lugar_nacimiento,genero, telefono, email,gestion, direccion, contacto,edad) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    "INSERT INTO alumno (num_registro,foto,nombre, apellido_paterno, apellido_materno,fecha_nacimiento, ci, expedido, lugar_nacimiento,genero, telefono, email,gestion, direccion, contacto,edad, habilitacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
     [
       num_registro,
       foto,
@@ -99,6 +100,7 @@ export const createAlumno = async (req, res) => {
       direccion, 
       contacto,
       edad,
+      habilitacion
       //fecha_registro
       ]
   ); 
@@ -135,7 +137,8 @@ export const updateAlumno = async (req, res) => {
         direccion, 
         contacto,
         edad,
-        fecha_nacimiento  
+        fecha_nacimiento,
+        habilitacion  
 
         } = req.body;
 
@@ -143,7 +146,7 @@ export const updateAlumno = async (req, res) => {
         const mySQLDateString_fecha_nacimiento = isoDate_fecha_nacimiento.toJSON().slice(0, 19).replace('T', ' '); 
 
   try {
-    const [result] = await pool.query('UPDATE alumno SET num_registro = IFNULL(?,num_registro), nombre = IFNULL(?,nombre), apellido_paterno = IFNULL(?,apellido_paterno), apellido_materno = IFNULL(?,apellido_materno), ci = IFNULL(?,ci), expedido = IFNULL(?,expedido), lugar_nacimiento = IFNULL(?,lugar_nacimiento), genero = IFNULL(?,genero), telefono = IFNULL(?,telefono),  email = IFNULL(?,email), gestion = IFNULL(?,gestion), direccion = IFNULL(?,direccion), contacto = IFNULL(?,contacto), edad = IFNULL(?,edad), fecha_nacimiento = IFNULL(?,fecha_nacimiento) WHERE id = ?'
+    const [result] = await pool.query('UPDATE alumno SET num_registro = IFNULL(?,num_registro), nombre = IFNULL(?,nombre), apellido_paterno = IFNULL(?,apellido_paterno), apellido_materno = IFNULL(?,apellido_materno), ci = IFNULL(?,ci), expedido = IFNULL(?,expedido), lugar_nacimiento = IFNULL(?,lugar_nacimiento), genero = IFNULL(?,genero), telefono = IFNULL(?,telefono),  email = IFNULL(?,email), gestion = IFNULL(?,gestion), direccion = IFNULL(?,direccion), contacto = IFNULL(?,contacto), edad = IFNULL(?,edad), fecha_nacimiento = IFNULL(?,fecha_nacimiento), habilitacion = IFNULL(?,habilitacion) WHERE id = ?'
   , [
       num_registro,
       nombre,
@@ -160,6 +163,7 @@ export const updateAlumno = async (req, res) => {
       contacto,
       edad,
       mySQLDateString_fecha_nacimiento,
+      habilitacion,
       id
   ])
 
