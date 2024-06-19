@@ -44,7 +44,8 @@ export const createDocente = async (req, res) => {
     fecha_ingreso,
     trayectoria,
     gestion,
-    contacto
+    contacto,
+    habilitacion
        } = req.body;
   console.log(req.body)
 
@@ -54,7 +55,7 @@ export const createDocente = async (req, res) => {
  
   try { 
       const [rows] = await pool.query(
-    "INSERT INTO docente (foto,nombre, apellidos, genero, mobile, designacion, especialidad, direccion, email, fecha_ingreso, trayectoria, gestion, contacto) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    "INSERT INTO docente (foto,nombre, apellidos, genero, mobile, designacion, especialidad, direccion, email, fecha_ingreso, trayectoria, gestion, contacto, habilitacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
     [
         foto,
         nombre, 
@@ -68,7 +69,8 @@ export const createDocente = async (req, res) => {
         mySQLDateString_fecha_ingreso,
         trayectoria,
         gestion,
-        contacto
+        contacto,
+        habilitacion
       ]
   ); 
 
@@ -100,7 +102,8 @@ export const createDocente = async (req, res) => {
       fecha_ingreso,
       trayectoria,
       gestion,
-      contacto 
+      contacto,
+      habilitacion 
 
         } = req.body;
 
@@ -108,7 +111,7 @@ export const createDocente = async (req, res) => {
         const mySQLDateString_fecha_ingreso = isoDate_fecha_ingreso.toJSON().slice(0, 19).replace('T', ' '); 
 
   try {
-    const [result] = await pool.query('UPDATE docente SET nombre = IFNULL(?,nombre), apellidos = IFNULL(?,apellidos), genero = IFNULL(?,genero), mobile = IFNULL(?,mobile), designacion = IFNULL(?,designacion), especialidad = IFNULL(?,especialidad),  direccion = IFNULL(?,direccion), email = IFNULL(?,email), fecha_ingreso = IFNULL(?,fecha_ingreso), trayectoria = IFNULL(?,trayectoria), gestion = IFNULL(?,gestion), contacto = IFNULL(?,contacto) WHERE id = ?'
+    const [result] = await pool.query('UPDATE docente SET nombre = IFNULL(?,nombre), apellidos = IFNULL(?,apellidos), genero = IFNULL(?,genero), mobile = IFNULL(?,mobile), designacion = IFNULL(?,designacion), especialidad = IFNULL(?,especialidad),  direccion = IFNULL(?,direccion), email = IFNULL(?,email), fecha_ingreso = IFNULL(?,fecha_ingreso), trayectoria = IFNULL(?,trayectoria), gestion = IFNULL(?,gestion), contacto = IFNULL(?,contacto), habilitacion = IFNULL(?,habilitacion) WHERE id = ?'
   , [
     nombre, 
     apellidos, 
@@ -122,6 +125,7 @@ export const createDocente = async (req, res) => {
     trayectoria,
     gestion,
     contacto,
+    habilitacion,
     id
   ])
 
