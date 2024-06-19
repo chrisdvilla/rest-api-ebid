@@ -66,13 +66,16 @@ export const createAdmision = async (req, res) => {
     nota_contemporaneo,
     nota_bolivianas,
     admitido,
-    id_alumno  
+    id_alumno,
+    congelado,
+    carrera,
+    mencion  
        } = req.body;
   console.log(req.body)
  
   try { 
       const [rows] = await pool.query(
-    "INSERT INTO admision (anio_admision, estado, modalidad, carrera_hab, carrera_elegida, gestion, nota_clasico, nota_contemporaneo, nota_bolivianas, admitido, id_alumno) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+    "INSERT INTO admision (anio_admision, estado, modalidad, carrera_hab, carrera_elegida, gestion, nota_clasico, nota_contemporaneo, nota_bolivianas, admitido, id_alumno, congelado, carrera, mencion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
     [
         anio_admision,
         estado,
@@ -84,7 +87,10 @@ export const createAdmision = async (req, res) => {
         nota_contemporaneo,
         nota_bolivianas,
         admitido,
-        id_alumno
+        id_alumno,
+        congelado,
+        carrera,
+        mencion  
       ]
   ); 
 
@@ -117,11 +123,14 @@ export const createAdmision = async (req, res) => {
     nota_bolivianas,
     admitido,
     id_alumno,
+    congelado,
+    carrera,
+    mencion  
 
         } = req.body;
 
   try {
-    const [result] = await pool.query('UPDATE admision SET anio_admision = IFNULL(?,anio_admision), estado = IFNULL(?,estado), modalidad = IFNULL(?,modalidad), carrera_hab = IFNULL(?,carrera_hab), carrera_elegida = IFNULL(?,carrera_elegida), gestion = IFNULL(?,gestion), nota_clasico = IFNULL(?,nota_clasico), nota_contemporaneo = IFNULL(?,nota_contemporaneo),  nota_bolivianas = IFNULL(?,nota_bolivianas), admitido = IFNULL(?,admitido), id_alumno = IFNULL(?,id_alumno) WHERE id = ?'
+    const [result] = await pool.query('UPDATE admision SET anio_admision = IFNULL(?,anio_admision), estado = IFNULL(?,estado), modalidad = IFNULL(?,modalidad), carrera_hab = IFNULL(?,carrera_hab), carrera_elegida = IFNULL(?,carrera_elegida), gestion = IFNULL(?,gestion), nota_clasico = IFNULL(?,nota_clasico), nota_contemporaneo = IFNULL(?,nota_contemporaneo),  nota_bolivianas = IFNULL(?,nota_bolivianas), admitido = IFNULL(?,admitido), id_alumno = IFNULL(?,id_alumno), congelado = IFNULL(?,congelado), carrera = IFNULL(?,carrera), mencion = IFNULL(?,mencion) WHERE id = ?'
   , [
     anio_admision,
     estado,
@@ -134,6 +143,9 @@ export const createAdmision = async (req, res) => {
     nota_bolivianas,
     admitido,
     id_alumno,
+    congelado,
+    carrera,
+    mencion,  
     id
   ])
 
