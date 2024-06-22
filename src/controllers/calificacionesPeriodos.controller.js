@@ -74,13 +74,15 @@ export const getCalificacionPUno = async (req, res) => {
 
 export const createCalificacionPUno = async (req, res) => {
   const { 
-    asistencia,
+    asistencia_teo,
+    asistencia_pra,
     gestion,
     id_alumno,
     id_materia,
     evaluacion1,
     evaluacion2,
     evaluacion3,
+    evaluacion4,
     notaFinal_per,
     nota_literal_per,
     obs_per,
@@ -97,15 +99,17 @@ export const createCalificacionPUno = async (req, res) => {
  
   try { 
       const [rows] = await pool.query(
-    "INSERT INTO calificaciones_periodo_uno (asistencia, gestion, id_alumno, id_materia, evaluacion1, evaluacion2, evaluacion3, notaFinal_per, nota_literal_per, obs_per, codigo, nombre, apellido_paterno, apellido_materno, id_docente) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    "INSERT INTO calificaciones_periodo_uno (asistencia_teo, asistencia_pra, gestion, id_alumno, id_materia, evaluacion1, evaluacion2, evaluacion3, evaluacion4, notaFinal_per, nota_literal_per, obs_per, codigo, nombre, apellido_paterno, apellido_materno, id_docente) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
     [
-        asistencia,
+        asistencia_teo,
+        asistencia_pra,
         gestion,
         id_alumno,
         id_materia,
         evaluacion1,
         evaluacion2,
         evaluacion3,
+        evaluacion4,
         notaFinal_per,
         nota_literal_per,
         obs_per,
@@ -134,13 +138,15 @@ export const createCalificacionPUno = async (req, res) => {
 export const updateCalificacionPUno = async (req, res) => {
     const { id } = req.params;
     const { 
-        asistencia,
+        asistencia_teo,
+        asistencia_pra,
         gestion,
         id_alumno,
         id_materia,
         evaluacion1,
         evaluacion2,
         evaluacion3,
+        evaluacion4,
         notaFinal_per,
         nota_literal_per,
         obs_per,
@@ -153,15 +159,17 @@ export const updateCalificacionPUno = async (req, res) => {
           } = req.body;
   
     try {
-      const [result] = await pool.query('UPDATE calificaciones_periodo_uno SET asistencia = IFNULL(?,asistencia), gestion = IFNULL(?,gestion), id_alumno = IFNULL(?,id_alumno), id_materia = IFNULL(?,id_materia), evaluacion1 = IFNULL(?,evaluacion1), evaluacion2 = IFNULL(?,evaluacion2),  evaluacion3 = IFNULL(?,evaluacion3), notaFinal_per = IFNULL(?,notaFinal_per), nota_literal_per = IFNULL(?,nota_literal_per), obs_per = IFNULL(?,obs_per), codigo = IFNULL(?,codigo), nombre = IFNULL(?,nombre), apellido_paterno = IFNULL(?,apellido_paterno), apellido_materno = IFNULL(?,apellido_materno), id_docente = IFNULL(?,id_docente) WHERE id = ?'
+      const [result] = await pool.query('UPDATE calificaciones_periodo_uno SET asistencia_teo = IFNULL(?,asistencia_teo), asistencia_pra = IFNULL(?,asistencia_pra), gestion = IFNULL(?,gestion), id_alumno = IFNULL(?,id_alumno), id_materia = IFNULL(?,id_materia), evaluacion1 = IFNULL(?,evaluacion1), evaluacion2 = IFNULL(?,evaluacion2),  evaluacion3 = IFNULL(?,evaluacion3), evaluacion4 = IFNULL(?,evaluacion4), notaFinal_per = IFNULL(?,notaFinal_per), nota_literal_per = IFNULL(?,nota_literal_per), obs_per = IFNULL(?,obs_per), codigo = IFNULL(?,codigo), nombre = IFNULL(?,nombre), apellido_paterno = IFNULL(?,apellido_paterno), apellido_materno = IFNULL(?,apellido_materno), id_docente = IFNULL(?,id_docente) WHERE id = ?'
     , [
-        asistencia,
+        asistencia_teo,
+        asistencia_pra,
         gestion,
         id_alumno,
         id_materia,
         evaluacion1,
         evaluacion2,
         evaluacion3,
+        evaluacion4,
         notaFinal_per,
         nota_literal_per,
         obs_per,
