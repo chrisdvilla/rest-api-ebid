@@ -20,6 +20,7 @@ import tallerRoutes from './routes/taller.routes.js'
 import calificacionesPeriodosRoutes from './routes/calificacionesPeriodos.routes.js'
 import calificacionesPeriodoDosRoutes from './routes/calificacionesPeriodoDos.routes.js'
 import calificacionesPeriodoTresRoutes from './routes/calificacionesPeriodoTres.routes.js'
+import calificacionesPeriodoCuatroRoutes from './routes/calificacionesPeriodoCuatro.routes.js'
 
 
 const app = express();
@@ -61,6 +62,7 @@ app.use('/api',tallerRoutes)
 app.use('/api',calificacionesPeriodosRoutes) 
 app.use('/api',calificacionesPeriodoDosRoutes) 
 app.use('/api',calificacionesPeriodoTresRoutes) 
+app.use('/api',calificacionesPeriodoCuatroRoutes) 
 
 app.use((req, res, next) => {
    res.status(404).json({
