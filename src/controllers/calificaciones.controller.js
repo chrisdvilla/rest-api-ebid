@@ -82,6 +82,8 @@ export const createCalificacion = async (req, res) => {
     nota2,
     nota3,
     nota4,
+    notaPro,
+    nota_literal_pro,
     notaFinal,
     nota_literal,
     obs,
@@ -99,7 +101,7 @@ export const createCalificacion = async (req, res) => {
  
   try { 
       const [rows] = await pool.query(
-    "INSERT INTO calificaciones (asistencia, gestion, id_alumno, id_materia, nota1, nota2, nota3, nota4, notaFinal, nota_literal, obs, segundoT, codigo, nombre, apellido_paterno, apellido_materno, id_docente) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    "INSERT INTO calificaciones (asistencia, gestion, id_alumno, id_materia, nota1, nota2, nota3, nota4, notaPro, nota_literal_pro, notaFinal, nota_literal, obs, segundoT, codigo, nombre, apellido_paterno, apellido_materno, id_docente) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
     [
         asistencia,
         gestion,
@@ -109,6 +111,8 @@ export const createCalificacion = async (req, res) => {
         nota2,
         nota3,
         nota4,
+        notaPro,
+        nota_literal_pro,
         notaFinal,
         nota_literal,
         obs,
@@ -146,6 +150,8 @@ export const updateCalificacion = async (req, res) => {
         nota2,
         nota3,
         nota4,
+        notaPro,
+        nota_literal_pro,
         notaFinal,
         nota_literal,
         obs,
@@ -159,7 +165,7 @@ export const updateCalificacion = async (req, res) => {
           } = req.body;
   
     try {
-      const [result] = await pool.query('UPDATE calificaciones SET asistencia = IFNULL(?,asistencia), gestion = IFNULL(?,gestion), id_alumno = IFNULL(?,id_alumno), id_materia = IFNULL(?,id_materia), nota1 = IFNULL(?,nota1), nota2 = IFNULL(?,nota2),  nota3 = IFNULL(?,nota3), nota4 = IFNULL(?,nota4), notaFinal = IFNULL(?,notaFinal), nota_literal = IFNULL(?,nota_literal), obs = IFNULL(?,obs), segundoT = IFNULL(?,segundoT), codigo = IFNULL(?,codigo), nombre = IFNULL(?,nombre), apellido_paterno = IFNULL(?,apellido_paterno), apellido_materno = IFNULL(?,apellido_materno), id_docente = IFNULL(?,id_docente) WHERE id = ?'
+      const [result] = await pool.query('UPDATE calificaciones SET asistencia = IFNULL(?,asistencia), gestion = IFNULL(?,gestion), id_alumno = IFNULL(?,id_alumno), id_materia = IFNULL(?,id_materia), nota1 = IFNULL(?,nota1), nota2 = IFNULL(?,nota2),  nota3 = IFNULL(?,nota3), nota4 = IFNULL(?,nota4), notaPro = IFNULL(?,notaPro), nota_literal_pro = IFNULL(?,nota_literal_pro), notaFinal = IFNULL(?,notaFinal), nota_literal = IFNULL(?,nota_literal), obs = IFNULL(?,obs), segundoT = IFNULL(?,segundoT), codigo = IFNULL(?,codigo), nombre = IFNULL(?,nombre), apellido_paterno = IFNULL(?,apellido_paterno), apellido_materno = IFNULL(?,apellido_materno), id_docente = IFNULL(?,id_docente) WHERE id = ?'
     , [
         asistencia,
         gestion,
@@ -169,6 +175,8 @@ export const updateCalificacion = async (req, res) => {
         nota2,
         nota3,
         nota4,
+        notaPro,
+        nota_literal_pro,
         notaFinal,
         nota_literal,
         obs,
