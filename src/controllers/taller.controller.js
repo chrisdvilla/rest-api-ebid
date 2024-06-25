@@ -26,6 +26,28 @@ export const getTaller = async (req, res) => {
         message: "Taller by alumno no encontrado",
       });
 
+    res.json(rows);
+  } catch (error) {
+    return res.status(500).json({
+      message: "Algo salio mal",
+    });
+  }
+}; 
+
+export const getTallerById = async (req, res) => {
+  console.log(req.params)
+ 
+  try {
+    
+     const [rows] = await pool.query("SELECT * FROM taller WHERE id = ?", [
+      req.params.id_taller,
+    ]); 
+
+    if (rows.length <= 0)
+      return res.status(404).json({
+        message: "Taller no encontrado",
+      });
+
     res.json(rows[0]);
   } catch (error) {
     return res.status(500).json({
@@ -132,6 +154,7 @@ export const deleteTaller = async (req, res) => {
     });
   } 
 };
+
 
 export const getTalleresLista = async (req, res) => {
     try {
